@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Subject Management</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Sidebar -->
+
+        <div class="sidebar">
+
+            <h2>🎓 ERP Lite</h2>
+
+            <a href="/dashboard">🏠 Dashboard</a>
+
+            <a href="/students">👨‍🎓 Students</a>
+
+            <a href="/courses">📚 Courses</a>
+
+            <a href="/subjects">📖 Subjects</a>
+
+            <a href="/attendance">📅 Attendance</a>
+
+            <a href="/camera">📷 AI Attendance</a>
+
+            <a href="/fees">💰 Fees</a>
+
+            <a href="/college-settings">🏫 College Settings</a>
+
+            <a href="/results">📊 Results</a>
+
+            <a href="/logout">🚪 Logout</a>
+
+        </div>
+
+        <!-- Content -->
+
+        <div class="content">
+
+            <h1>📖 Subject Management</h1>
+
+            <hr>
+
+            <form method="POST">
+
+                <input type="text" name="course" placeholder="Course" required>
+
+                <br><br>
+
+                <input type="text" name="semester" placeholder="Semester" required>
+
+                <br><br>
+
+                <input type="text" name="subject_name" placeholder="Subject Name" required>
+
+                <br><br>
+
+                <input type="text" name="subject_code" placeholder="Subject Code (Example : CS101)" required>
+
+                <br><br>
+
+                <button type="submit">
+
+                    ➕ Add Subject
+
+                </button>
+
+            </form>
+
+            <hr>
+
+            <input type="text" id="search" placeholder="🔍 Search Subject..." style="width:300px;padding:10px;"
+                onkeyup="searchSubject()">
+
+            <br><br>
+
+            <table border="1" width="100%" cellpadding="10" id="subjectTable">
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Course</th>
+
+                    <th>Semester</th>
+
+                    <th>Subject</th>
+
+                    <th>Code</th>
+
+                    <th>Edit</th>
+
+                    <th>Delete</th>
+
+                </tr>
+
+                {% for s in subjects %}
+                
+                <tr>
+                
+                    <td>{{ s[0] }}</td>
+                
+                    <td>{{ s[3] }}</td>
+                
+                    <td>{{ s[4] }}</td>
+                
+                    <td>{{ s[1] }}</td>
+                
+                    <td>{{ s[2] }}</td>
+                
+                    <td>
+                
+                        <a href="/edit-subject/{{ s[0] }}">
+                            ✏ Edit
+                        </a>
+                
+                    </td>
+                
+                    <td>
+                
+                        <a href="/delete-subject/{{ s[0] }}" onclick="return confirm('Delete this subject?')">
+                            🗑 Delete
+                        </a>
+                
+                    </td>
+                
+                </tr>
+                
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        function searchSubject() {
+
+            let input = document.getElementById("search").value.toLowerCase();
+
+            let table = document.getElementById("subjectTable");
+
+            let tr = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < tr.length; i++) {
+
+                let txt = tr[i].innerText.toLowerCase();
+
+                if (txt.indexOf(input) > -1) {
+
+                    tr[i].style.display = "";
+
+                }
+
+                else {
+
+                    tr[i].style.display = "none";
+
+                }
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

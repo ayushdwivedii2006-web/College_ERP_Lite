@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Edit Subject</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="content">
+
+            <h1>✏ Edit Subject</h1>
+
+            <hr>
+
+            <form method="POST">
+
+                <input type="text" name="subject_name" value="{{ subject[1] }}" required>
+
+                <br><br>
+
+                <input type="text" name="subject_code" value="{{ subject[2] }}" required>
+
+                <br><br>
+
+                <input type="text" name="course" value="{{ subject[3] }}" required>
+
+                <br><br>
+
+                <input type="text" name="semester" value="{{ subject[4] }}" required>
+
+                <br><br>
+
+                <button type="submit">
+
+                    💾 Update Subject
+
+                </button>
+
+            </form>
+
+            <br>
+
+            <a href="/subjects">
+
+                <button>
+
+                    ⬅ Back
+
+                </button>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

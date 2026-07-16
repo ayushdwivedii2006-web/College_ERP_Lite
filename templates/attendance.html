@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Attendance Management</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="sidebar">
+
+            <h2>🎓 ERP Lite</h2>
+
+            <a href="/dashboard">🏠 Dashboard</a>
+            <a href="/students">👨‍🎓 Students</a>
+            <a href="/courses">📚 Courses</a>
+            <a href="/subjects">📖 Subjects</a>
+            <a href="/fees">💰 Fees</a>
+            <a href="/attendance">📅 Attendance</a>
+            <a href="#">📊 Results</a>
+            <a href="/college-settings">🏫 College Settings</a>
+            <a href="/change-admin">🔐 Change Username & Password</a>
+            <a href="/logout">🚪 Logout</a>
+
+        </div>
+
+        <div class="content">
+
+            <h1>📅 Attendance Management</h1>
+
+            <a href="/camera">
+                <button style="
+                    background:#28a745;
+                    color:white;
+                    padding:12px 25px;
+                    border:none;
+                    border-radius:6px;
+                    font-size:16px;
+                    cursor:pointer;
+                    margin-bottom:20px;">
+                    📷 Start AI Camera
+                </button>
+            </a>
+
+            <hr><br>
+
+            <!-- SEARCH -->
+            <form method="GET">
+
+                <input type="text" name="search" placeholder="🔍 Search Student Name or Roll">
+
+                <button type="submit">Search</button>
+
+                <a href="/attendance">
+                    <button type="button">Show All</button>
+                </a>
+
+            </form>
+
+            <hr><br>
+
+            <!-- ADD ATTENDANCE -->
+            <form method="POST">
+
+                <input type="text" name="student_name" placeholder="Student Name" required><br><br>
+
+                <input type="text" name="roll" placeholder="Roll Number" required><br><br>
+
+                <input type="date" name="attendance_date" required><br><br>
+
+                <select name="status" required>
+
+                    <option value="">Select Status</option>
+                    <option value="Present">✅ Present</option>
+                    <option value="Absent">❌ Absent</option>
+
+                </select>
+
+                <br><br>
+
+                <button type="submit">Save Attendance</button>
+
+            </form>
+
+            <hr><br>
+
+            <h2>📋 Attendance Records</h2>
+
+            <table border="1" cellpadding="10">
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Roll</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+
+                </tr>
+
+                {% for row in attendance %}
+
+                <tr>
+
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+
+                    <td>
+
+                        <a href="/edit-attendance/{{ row[0] }}">✏️ Edit</a>
+
+                        |
+
+                        <a href="/delete-attendance/{{ row[0] }}"
+                            onclick="return confirm('Delete this attendance record?')">
+                            🗑️ Delete
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Results</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="sidebar">
+
+            <h2>🎓 ERP Lite</h2>
+
+            <a href="/dashboard">🏠 Dashboard</a>
+            <a href="/students">👨‍🎓 Students</a>
+            <a href="/courses">📚 Courses</a>
+            <a href="/subjects">📖 Subjects</a>
+            <a href="/attendance">📅 Attendance</a>
+            <a href="/camera">📷 AI Attendance</a>
+            <a href="/fees">💰 Fees</a>
+            <a href="/results">📊 Results</a>
+            <a href="/change-admin">🔐 Change Admin</a>
+            <a href="/logout">🚪 Logout</a>
+
+        </div>
+
+        <div class="content">
+
+            <h1>📊 Student Results</h1>
+
+            <hr>
+
+            <h2>Add Student Result</h2>
+
+            <form method="POST">
+
+                <select id="student" onchange="fillStudent()" required>
+
+                    <option value="">
+                        Select Student
+                    </option>
+
+                    {% for s in students %}
+
+                    <option value="{{ s[0] }}|{{ s[1] }}|{{ s[2] }}">
+
+                        {{ s[0] }} ({{ s[1] }})
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+                <input type="hidden" name="student_name" id="student_name">
+
+                <input type="hidden" name="roll" id="roll">
+
+                <input type="hidden" name="course" id="course">
+
+                <input type="text" id="course_show" placeholder="Course" readonly>
+
+                <select name="semester" id="semester" onchange="loadSubjects()" required>
+
+                    <option value="">
+                        Select Semester
+                    </option>
+
+                    <option>Semester 1</option>
+                    <option>Semester 2</option>
+                    <option>Semester 3</option>
+                    <option>Semester 4</option>
+                    <option>Semester 5</option>
+                    <option>Semester 6</option>
+
+                </select>
+
+                <br><br>
+
+                <table id="subjectTable" border="1" cellpadding="10">
+
+                    <tr>
+
+                        <th>Subject</th>
+                        <th>Marks</th>
+                        <th>Total</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                </table>
+
+                <br>
+
+                <button type="button" onclick="addSubject()">
+
+                    ➕ Add Subject
+
+                </button>
+
+                <br><br>
+
+                <button type="submit">
+
+                    ✅ Generate Result
+
+                </button>
+
+            </form>
+
+            <hr>
+            <!-- ================= Search ================= -->
+            
+            <form method="GET">
+            
+                <input type="text" name="search" placeholder="Search Name / Roll">
+            
+                <button type="submit">
+            
+                    🔍 Search
+            
+                </button>
+            
+            </form>
+            
+            <br>
+            
+            <!-- ================= Result Table ================= -->
+            
+            <table border="1">
+            
+                <tr>
+            
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Roll</th>
+                    <th>Course</th>
+                    <th>Obtained</th>
+                    <th>Total</th>
+                    <th>Percentage</th>
+                    <th>Grade</th>
+                    <th>Action</th>
+            
+                </tr>
+            
+                {% for r in results %}
+            
+                <tr>
+            
+                    <td>{{ r[0] }}</td>
+            
+                    <td>{{ r[1] }}</td>
+            
+                    <td>{{ r[2] }}</td>
+            
+                    <td>{{ r[3] }}</td>
+            
+                    <td>{{ r[4] }}</td>
+            
+                    <td>{{ r[5] }}</td>
+            
+                    <td>
+            
+                        {{ "%.2f"|format(r[6]) }}%
+            
+                    </td>
+            
+                    <td>{{ r[7] }}</td>
+            
+                    <td>
+            
+                        <button onclick="window.location.href='/view-result/{{ r[0] }}'">
+            
+                            👁 View
+            
+                        </button>
+            
+                        <button onclick="window.location.href='/student-profile/{{ r[2] }}'">
+            
+                            👤 Profile
+            
+                        </button>
+            
+                        <button onclick="window.location.href='/edit-result/{{ r[0] }}'">
+            
+                            ✏ Edit
+            
+                        </button>
+            
+                        <button onclick="
+                            if(confirm('Delete this result?'))
+                            window.location.href='/delete-result/{{ r[0] }}'
+                            ">
+            
+                            🗑 Delete
+            
+                        </button>
+            
+                    </td>
+            
+                </tr>
+            
+                {% endfor %}
+            
+            </table>
+            
+            </div>
+            
+            </div>
+            <script>
+
+                const subjects = {{ subjects | tojson | safe }};
+
+                function fillStudent() {
+
+                    let value =
+                        document.getElementById("student").value;
+
+                    if (value == "") {
+                        return;
+                    }
+
+                    let data = value.split("|");
+
+                    document.getElementById(
+                        "student_name"
+                    ).value = data[0];
+
+                    document.getElementById(
+                        "roll"
+                    ).value = data[1];
+
+                    document.getElementById(
+                        "course"
+                    ).value = data[2];
+
+                    document.getElementById(
+                        "course_show"
+                    ).value = data[2];
+                }
+
+                function loadSubjects() {
+
+                    let course =
+                        document.getElementById("course").value;
+
+                    let semester =
+                        document.getElementById("semester").value;
+
+                    let table =
+                        document.getElementById("subjectTable");
+
+                    while (table.rows.length > 1) {
+
+                        table.deleteRow(1);
+
+                    }
+
+                    for (let i = 0; i < subjects.length; i++) {
+
+                        if (
+                            subjects[i][3] == course &&
+                            subjects[i][4] == semester
+                        ) {
+
+                            let row = table.insertRow(-1);
+
+                            row.innerHTML = `
+            
+                                <td>
+            
+                                    <input
+                                        type="text"
+                                        name="subject[]"
+                                        value="${subjects[i][1]}"
+                                        readonly>
+            
+                                </td>
+            
+                                <td>
+            
+                                    <input
+                                        type="number"
+                                        name="marks[]"
+                                        placeholder="Marks"
+                                        required>
+            
+                                </td>
+            
+                                <td>
+            
+                                    <input
+                                        type="number"
+                                        name="total_marks[]"
+                                        value="100"
+                                        required>
+            
+                                </td>
+            
+                                <td>
+            
+                                    <button
+                                        type="button"
+                                        onclick="removeSubject(this)">
+            
+                                        ❌ Remove
+            
+                                    </button>
+            
+                                </td>
+            
+                            `;
+                        }
+                    }
+                }
+
+                function addSubject() {
+
+                    let table =
+                        document.getElementById("subjectTable");
+
+                    let row = table.insertRow(-1);
+
+                    row.innerHTML = `
+            
+                        <td>
+            
+                            <input
+                                type="text"
+                                name="subject[]"
+                                placeholder="Subject Name"
+                                required>
+            
+                        </td>
+            
+                        <td>
+            
+                            <input
+                                type="number"
+                                name="marks[]"
+                                placeholder="Marks"
+                                required>
+            
+                        </td>
+            
+                        <td>
+            
+                            <input
+                                type="number"
+                                name="total_marks[]"
+                                value="100"
+                                required>
+            
+                        </td>
+            
+                        <td>
+            
+                            <button
+                                type="button"
+                                onclick="removeSubject(this)">
+            
+                                ❌ Remove
+            
+                            </button>
+            
+                        </td>
+            
+                    `;
+                }
+
+                function removeSubject(button) {
+
+                    let row =
+                        button.parentNode.parentNode;
+
+                    row.remove();
+                }
+
+            </script>
+            
+            </body>
+            
+            </html>

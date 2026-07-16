@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Student Report Card</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Sidebar -->
+
+        <div class="sidebar">
+
+            <h2>🎓 ERP Lite</h2>
+
+            <a href="/dashboard">🏠 Dashboard</a>
+
+            <a href="/students">👨‍🎓 Students</a>
+
+            <a href="/courses">📚 Courses</a>
+
+            <a href="/attendance">📅 Attendance</a>
+
+            <a href="/camera">📷 AI Attendance</a>
+
+            <a href="/fees">💰 Fees</a>
+            <a href="/college-settings">🏫 College Settings</a>
+
+            <a href="/results">📊 Results</a>
+
+            <a href="/logout">🚪 Logout</a>
+
+        </div>
+
+        <!-- Main Content -->
+
+        <div class="content">
+
+            <div style="background:white;
+            padding:30px;
+            border-radius:12px;
+            box-shadow:0px 0px 10px gray;">
+
+                <center>
+                
+                    {% if college and college[7] %}
+                
+                    <img src="{{ url_for('static', filename='uploads/' + college[7]) }}" width="90" height="90"
+                        style="margin-bottom:10px;">
+                
+                    {% endif %}
+                
+                    <h1>{{ college[1] }}</h1>
+                
+                    <p>
+                
+                        {{ college[2] }}
+                
+                    </p>
+                
+                    <p>
+                
+                        📞 {{ college[3] }}
+                
+                        &nbsp;&nbsp;&nbsp;
+                
+                        ✉ {{ college[4] }}
+                
+                        &nbsp;&nbsp;&nbsp;
+                
+                        🌐 {{ college[5] }}
+                
+                    </p>
+                
+                    <h2>STUDENT REPORT CARD</h2>
+                
+                </center>
+                
+                <hr>
+
+                <table width="100%">
+
+                    <tr>
+
+                        <td>
+
+                            <h3>
+
+                                Student Name :
+                                {{ result[1] }}
+
+                            </h3>
+
+                            <h3>
+
+                                Roll Number :
+                                {{ result[2] }}
+
+                            </h3>
+
+                            <h3>
+
+                                Course :
+                                {{ result[3] }}
+
+                            </h3>
+
+                        </td>
+
+                        <td align="right">
+
+                            {% if student and student[6] %}
+
+                            <img src="{{ url_for('static', filename='uploads/' + student[6]) }}" width="130"
+                                height="150" style="border:2px solid black;">
+
+                            {% else %}
+
+                            <div style="width:130px;
+                            height:150px;
+                            border:2px solid black;
+                            display:flex;
+                            justify-content:center;
+                            align-items:center;">
+
+                                PHOTO
+
+                            </div>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                </table>
+
+                <hr>
+
+                <table border="1" width="100%" cellpadding="12" style="border-collapse:collapse;
+                text-align:center;">
+
+                    <tr style="background:#0d6efd;
+                    color:white;">
+
+                        <th>S.No</th>
+
+                        <th>Subject</th>
+
+                        <th>Obtained</th>
+
+                        <th>Total</th>
+
+                    </tr>
+
+                    {% for s in subjects %}
+
+                    <tr>
+
+                        <td>{{ loop.index }}</td>
+
+                        <td>{{ s[0] }}</td>
+
+                        <td>{{ s[1] }}</td>
+
+                        <td>{{ s[2] }}</td>
+
+                    </tr>
+
+                    {% endfor %}
+                                    </table>
+                                    
+                                    <br>
+                                    
+                                    <table border="1" width="100%" cellpadding="10" style="border-collapse:collapse;">
+                                    
+                                        <tr>
+                                    
+                                            <th>Total Obtained Marks</th>
+                                    
+                                            <td>{{ result[4] }}</td>
+                                    
+                                            <th>Total Marks</th>
+                                    
+                                            <td>{{ result[5] }}</td>
+                                    
+                                        </tr>
+                                    
+                                        <tr>
+                                    
+                                            <th>Percentage</th>
+                                    
+                                            <td>{{ "%.2f"|format(result[6]) }}%</td>
+                                    
+                                            <th>Grade</th>
+                                    
+                                            <td>{{ result[7] }}</td>
+                                    
+                                        </tr>
+                                    
+                                        <tr>
+                                    
+                                            <th>Final Result</th>
+                                    
+                                            <td colspan="3">
+                                    
+                                                <b>{{ result[8] }}</b>
+                                    
+                                            </td>
+                                    
+                                        </tr>
+                                    
+                                    </table>
+                                    
+                                    <br><br>
+                                    
+                                    <table width="100%">
+                                    
+                                        <tr>
+                                    
+                                            <td align="left">
+                                    
+                                                ______________________
+                                    
+                                                <br><br>
+                                    
+                                                Class Teacher
+                                    
+                                            </td>
+                                    
+                                            <td align="center">
+                                    
+                                                ______________________
+                                    
+                                                <br><br>
+                                    
+                                                Exam Controller
+                                    
+                                            </td>
+                                            <td align="right">
+                                            
+                                                ______________________
+                                            
+                                                <br><br>
+                                            
+                                                {{ college[6] }}
+                                            
+                                                <br>
+                                            
+                                                Principal
+                                            
+                                            </td>
+                                    
+                                           
+                                    
+                                        </tr>
+                                    
+                                    </table>
+                                    
+                                    <br><br>
+                                    
+                                    <center>
+                                    
+                                        <button onclick="window.print()" style="padding:12px 25px;
+                                                            font-size:18px;
+                                                            background:#28a745;
+                                                            color:white;
+                                                            border:none;
+                                                            border-radius:8px;
+                                                            cursor:pointer;">
+                                    
+                                            🖨 Print Report Card
+                                    
+                                        </button>
+                                    
+                                        &nbsp;&nbsp;
+                                    
+                                        <button onclick="window.location.href='/results'" style="padding:12px 25px;
+                                                            font-size:18px;
+                                                            background:#007bff;
+                                                            color:white;
+                                                            border:none;
+                                                            border-radius:8px;
+                                                            cursor:pointer;">
+                                    
+                                            🔙 Back
+                                    
+                                        </button>
+                                    
+                                    </center>
+                                    
+                                    </div>
+                                    
+                                    </div>
+                                    
+                                    </div>
+                                    
+                                    </body>
+                                    
+                                    </html>
+                                    

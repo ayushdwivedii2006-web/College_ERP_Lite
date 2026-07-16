@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>AI Attendance Camera</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Sidebar -->
+
+        <div class="sidebar">
+
+            <h2>🎓 ERP Lite</h2>
+
+            <a href="/dashboard">🏠 Dashboard</a>
+
+            <a href="/students">👨‍🎓 Students</a>
+
+            <a href="/courses">📚 Courses</a>
+            <a href="/subjects">📖 Subjects</a>
+
+            <a href="/attendance">📅 Attendance</a>
+
+            <a href="/camera">📷 AI Attendance</a>
+
+            <a href="/fees">💰 Fees</a>
+
+            <a href="/college-settings">🏫 College Settings</a>
+
+            <a href="/results">📊 Results</a>
+
+            <a href="/logout">🚪 Logout</a>
+
+        </div>
+
+        <!-- Content -->
+
+        <div class="content">
+
+            <h1>🤖 AI Face Attendance</h1>
+
+            <hr>
+
+            <h2>Attendance Setup</h2>
+
+            <form method="POST">
+
+                <input type="text" name="session" placeholder="Session (2026-27)" required>
+
+                <br><br>
+
+                <input type="text" name="course" placeholder="Course (BCA)" required>
+
+                <br><br>
+
+                <input type="text" name="semester" placeholder="Semester" required>
+
+                <br><br>
+
+                <input type="text" name="section" placeholder="Section" required>
+
+                <br><br>
+
+                <input type="text" name="subject" placeholder="Subject" required>
+
+                <br><br>
+
+                <button type="submit">
+
+                    ✅ Save Attendance Setup
+
+                </button>
+
+            </form>
+
+            <hr>
+
+            <h2>📷 Live Camera</h2>
+
+            <img src="/video" width="750" style="border:4px solid #0d6efd;border-radius:10px;">
+
+            <br><br>
+
+            <a href="/attendance">
+
+                <button>
+
+                    ⬅ Back
+
+                </button>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

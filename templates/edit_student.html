@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Edit Student</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="sidebar">
+
+            <h2>🎓 ERP Lite</h2>
+
+            <a href="/dashboard">🏠 Dashboard</a>
+            <a href="/students">👨‍🎓 Students</a>
+            <a href="/courses">📚 Courses</a>
+            <a href="/fees">💰 Fees</a>
+            <a href="/attendance">📅 Attendance</a>
+            <a href="/dashboard">🏠 Dashboard</a>
+            <a href="/students">👨‍🎓 Students</a>
+            <a href="/courses">📚 Courses</a>
+            <a href="/change-admin">🔐 Change Username & Password</a>
+            <a href="/attendance">📅 Attendance</a>
+            <a href="/fees">💰 Fees</a>
+            <a href="/results">📊 Results</a>
+            <a href="/logout">🚪 Logout</a>
+            <a href="/change-admin">🔐 Change Username & Password</a>
+            <a href="/logout">🚪 Logout</a>
+
+        </div>
+
+        <div class="content">
+
+            <h1>✏️ Edit Student</h1>
+
+            <form method="POST" enctype="multipart/form-data">
+
+                <input type="text" name="name" value="{{ student[1] }}" required><br><br>
+
+                <input type="text" name="roll" value="{{ student[2] }}" required><br><br>
+
+                <input type="text" name="course" value="{{ student[3] }}" required><br><br>
+
+                <input type="text" name="mobile" value="{{ student[4] }}" required><br><br>
+
+                <input type="email" name="email" value="{{ student[5] }}" required><br><br>
+
+                <p><b>Current Photo</b></p>
+
+                {% if student[6] %}
+
+                <img src="{{ url_for('static', filename='uploads/' + student[6]) }}" width="120" height="120"
+                    style="border-radius:10px;"><br><br>
+
+                {% else %}
+
+                No Photo<br><br>
+
+                {% endif %}
+
+                <input type="file" name="photo" accept="image/*"><br><br>
+
+                <button type="submit">
+                    Update Student
+                </button>
+
+                <a href="/students">
+                    <button type="button">
+                        Back
+                    </button>
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

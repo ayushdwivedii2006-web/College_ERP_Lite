@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>College Settings</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Sidebar -->
+
+        <div class="sidebar">
+
+            <h2>🎓 ERP Lite</h2>
+
+            <a href="/dashboard">🏠 Dashboard</a>
+
+            <a href="/students">👨‍🎓 Students</a>
+
+            <a href="/courses">📚 Courses</a>
+
+            <a href="/attendance">📅 Attendance</a>
+
+            <a href="/camera">📷 AI Attendance</a>
+
+            <a href="/fees">💰 Fees</a>
+
+            <a href="/results">📊 Results</a>
+
+            <a href="/college-settings">🏫 College Settings</a>
+
+            <a href="/change-admin">🔐 Change Admin</a>
+
+            <a href="/logout">🚪 Logout</a>
+
+        </div>
+
+        <!-- Content -->
+
+        <div class="content">
+
+            <div style="background:white;
+            padding:30px;
+            border-radius:10px;
+            box-shadow:0px 0px 10px gray;">
+
+                <h1>🏫 College Settings</h1>
+
+                <hr>
+
+                <form method="POST" enctype="multipart/form-data">
+
+                    <label>
+
+                        College Name
+
+                    </label>
+
+                    <input type="text" name="college_name" value="{{ college[1] }}" required>
+
+                    <label>
+
+                        Address
+
+                    </label>
+
+                    <textarea name="address" rows="3" required>{{ college[2] }}</textarea>
+
+                    <label>
+
+                        Phone Number
+
+                    </label>
+
+                    <input type="text" name="phone" value="{{ college[3] }}">
+
+                    <label>
+
+                        Email
+
+                    </label>
+
+                    <input type="email" name="email" value="{{ college[4] }}">
+                                    <label>
+                                    
+                                        Website
+                                    
+                                    </label>
+                                    
+                                    <input type="text" name="website" value="{{ college[5] }}">
+                                    
+                                    <label>
+                                    
+                                        Principal Name
+                                    
+                                    </label>
+                                    
+                                    <input type="text" name="principal_name" value="{{ college[6] }}">
+                                    
+                                    <label>
+                                    
+                                        College Logo
+                                    
+                                    </label>
+                                    
+                                    <input type="file" name="logo">
+                                    
+                                    <br><br>
+                                    
+                                    {% if college[7] %}
+                                    
+                                    <h3>Current Logo</h3>
+                                    
+                                    <img src="{{ url_for('static', filename='uploads/' + college[7]) }}" width="150"
+                                        style="border:2px solid #333;padding:5px;">
+                                    
+                                    <br><br>
+                                    
+                                    {% endif %}
+                                    
+                                    <button type="submit" style="padding:12px 25px;
+                                                        background:#28a745;
+                                                        color:white;
+                                                        border:none;
+                                                        border-radius:8px;
+                                                        font-size:17px;
+                                                        cursor:pointer;">
+                                    
+                                        💾 Save Settings
+                                    
+                                    </button>
+                                    
+                                    </form>
+                                    
+                                    </div>
+                                    
+                                    </div>
+                                    
+                                    </div>
+                                    
+                                    </body>
+                                    
+                                    </html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>College ERP Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+
+            <h2>🎓 ERP Lite</h2>
+
+            <a href="/dashboard">🏠 Dashboard</a>
+            <a href="/students">👨‍🎓 Students</a>
+            <a href="/courses">📚 Courses</a>
+            <a href="/subjects">📖 Subjects</a>
+            <a href="/attendance">📅 Attendance</a>
+            <a href="/camera">📷 AI Attendance</a>
+            <a href="/results">📊 Results</a>
+            <a href="/fees">💰 Fees</a>
+            <a href="/college-settings">🏫 College Settings</a>
+            <a href="/change-admin">🔐 Change Admin</a>
+            <a href="/logout">🚪 Logout</a>
+
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+
+            <h1>🎓 College ERP Dashboard</h1>
+
+            <h3>Welcome {{ session["user"] }}</h3>
+
+            <br>
+
+            <div style="display:flex;flex-wrap:wrap;gap:20px;">
+
+                <!-- Students -->
+                <div
+                    style="background:#4CAF50;color:white;width:220px;padding:25px;border-radius:12px;text-align:center;">
+                    <h2>👨‍🎓</h2>
+                    <h3>Total Students</h3>
+                    <h1>{{ total_students }}</h1>
+                </div>
+
+                <!-- Courses -->
+                <div
+                    style="background:#2196F3;color:white;width:220px;padding:25px;border-radius:12px;text-align:center;">
+                    <h2>📚</h2>
+                    <h3>Total Courses</h3>
+                    <h1>{{ total_courses }}</h1>
+                </div>
+
+                <!-- Attendance -->
+                <div
+                    style="background:#9C27B0;color:white;width:220px;padding:25px;border-radius:12px;text-align:center;">
+                    <h2>✅</h2>
+                    <h3>Today's Attendance</h3>
+                    <h1>{{ today_attendance }}</h1>
+                </div>
+
+                <!-- Fees -->
+                <div
+                    style="background:#FF9800;color:white;width:220px;padding:25px;border-radius:12px;text-align:center;">
+                    <h2>💰</h2>
+                    <h3>Total Fees Collected</h3>
+                    <h1>₹ {{ total_fees }}</h1>
+                </div>
+
+                <!-- Pending -->
+                <div
+                    style="background:#F44336;color:white;width:220px;padding:25px;border-radius:12px;text-align:center;">
+                    <h2>⏳</h2>
+                    <h3>Pending Fees</h3>
+                    <h1>₹ {{ pending_fees }}</h1>
+                </div>
+
+                <!-- AI -->
+                <div
+                    style="background:#009688;color:white;width:220px;padding:25px;border-radius:12px;text-align:center;">
+                    <h2>📷</h2>
+                    <h3>AI Attendance</h3>
+                    <h2>🟢 ACTIVE</h2>
+                </div>
+
+            </div>
+
+            <br><br>
+
+            <h2>⚡ Quick Access</h2>
+
+            <div style="display:flex;gap:20px;flex-wrap:wrap;">
+
+                <a href="/students">
+                    <button style="padding:15px 35px;font-size:18px;">👨‍🎓 Students</button>
+                </a>
+
+                <a href="/attendance">
+                    <button style="padding:15px 35px;font-size:18px;">📅 Attendance</button>
+                </a>
+
+                <a href="/fees">
+                    <button style="padding:15px 35px;font-size:18px;">💰 Fees</button>
+                </a>
+
+                <a href="/camera">
+                    <button style="padding:15px 35px;font-size:18px;">📷 AI Camera</button>
+                </a>
+
+            </div>
+
+            <br><br>
+
+            <h2>📢 System Status</h2>
+
+            <table border="1" cellpadding="10" cellspacing="0" style="width:100%;background:white;">
+
+                <tr>
+                    <th>Module</th>
+                    <th>Status</th>
+                </tr>
+
+                <tr>
+                    <td>Student Management</td>
+                    <td>✅ Working</td>
+                </tr>
+
+                <tr>
+                    <td>Course Management</td>
+                    <td>✅ Working</td>
+                </tr>
+
+                <tr>
+                    <td>Attendance Management</td>
+                    <td>✅ Working</td>
+                </tr>
+
+                <tr>
+                    <td>AI Face Recognition</td>
+                    <td>🟢 Active</td>
+                </tr>
+
+                <tr>
+                    <td>Fees Management</td>
+                    <td>✅ Working</td>
+                </tr>
+
+                <tr>
+                    <td>Database (SQLite)</td>
+                    <td>🟢 Connected</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,211 @@
+/* ===========================
+   GOOGLE FONT
+=========================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #f4f7fc;
+}
+
+/* ===========================
+   CONTAINER
+=========================== */
+
+.container {
+    display: flex;
+}
+
+/* ===========================
+   SIDEBAR
+=========================== */
+
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    background: #1e293b;
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow: auto;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 14px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    transition: .3s;
+    font-size: 16px;
+}
+
+.sidebar a:hover {
+    background: #2563eb;
+    transform: translateX(6px);
+}
+
+/* ===========================
+   CONTENT
+=========================== */
+
+.content {
+    margin-left: 240px;
+    width: 100%;
+    padding: 35px;
+}
+
+.content h1 {
+    color: #1e293b;
+    margin-bottom: 30px;
+    font-size: 35px;
+}
+
+/* ===========================
+   DASHBOARD CARDS
+=========================== */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
+    transition: .3s;
+    text-align: center;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+.card h3 {
+    color: #64748b;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.card h2 {
+    font-size: 38px;
+    color: #2563eb;
+}
+
+/* ===========================
+   TABLE
+=========================== */
+
+table {
+    width: 100%;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border-collapse: collapse;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
+}
+
+table th {
+    background: #2563eb;
+    color: white;
+    padding: 15px;
+}
+
+table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+
+table tr:hover {
+    background: #f8f9ff;
+}
+
+/* ===========================
+   FORM
+=========================== */
+
+form {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+}
+
+button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+/* ===========================
+   LINKS
+=========================== */
+
+a[href*="delete"] {
+    color: red;
+    font-weight: bold;
+}
+
+a[href*="edit"] {
+    color: green;
+    font-weight: bold;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:768px) {
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .content {
+        margin-left: 0;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+}

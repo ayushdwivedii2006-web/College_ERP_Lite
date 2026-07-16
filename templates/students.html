@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="sidebar">
+
+            <h2>🎓 ERP Lite</h2>
+
+            <a href="/dashboard">🏠 Dashboard</a>
+            <a href="/students">👨‍🎓 Students</a>
+            <a href="/courses">📚 Courses</a>
+            <a href="/subjects">📖 Subjects</a>
+            <a href="/fees">💰 Fees</a>
+            <a href="/college-settings">🏫 College Settings</a>
+            <a href="/change-admin">🔐 Change Username & Password</a>
+            <a href="/attendance">📅 Attendance</a>
+            <a href="/dashboard">🏠 Dashboard</a>
+            <a href="/students">👨‍🎓 Students</a>
+            <a href="/courses">📚 Courses</a>
+            <a href="/change-admin">🔐 Change Username & Password</a>
+            <a href="/attendance">📅 Attendance</a>
+            <a href="/fees">💰 Fees</a>
+            <a href="/results">📊 Results</a>
+            <a href="/logout">🚪 Logout</a>
+            <a href="/logout">🚪 Logout</a>
+
+        </div>
+
+        <div class="content">
+
+            <h1>👨‍🎓 Student Management</h1>
+
+            <!-- SEARCH -->
+            <form method="GET">
+
+                <input type="text" name="search" placeholder="🔍 Search by Name or Roll Number">
+
+                <button type="submit">Search</button>
+
+                <a href="/students">
+                    <button type="button">Show All</button>
+                </a>
+
+            </form>
+
+            <hr><br>
+
+            <!-- ADD STUDENT -->
+            <form method="POST" enctype="multipart/form-data">
+
+                <input type="text" name="name" placeholder="Student Name" required><br><br>
+
+                <input type="text" name="roll" placeholder="Roll Number" required><br><br>
+
+                <input type="text" name="course" placeholder="Course" required><br><br>
+
+                <input type="text" name="mobile" placeholder="Mobile Number" required><br><br>
+
+                <input type="email" name="email" placeholder="Email Address" required><br><br>
+
+                <label><b>📷 Student Photo</b></label><br>
+
+                <input type="file" name="photo" accept="image/*"><br><br>
+
+                <button type="submit">
+                    ➕ Add Student
+                </button>
+
+            </form>
+
+            <hr><br>
+
+            <h2>📋 Student List</h2>
+
+            <table border="1" cellpadding="10">
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Photo</th>
+                    <th>Name</th>
+                    <th>Roll</th>
+                    <th>Course</th>
+                    <th>Mobile</th>
+                    <th>Email</th>
+                    <th>Action</th>
+
+                </tr>
+
+                {% for student in students %}
+
+                <tr>
+
+                    <td>{{ student[0] }}</td>
+
+                    <td>
+
+                        {% if student[6] %}
+
+                        <img src="{{ url_for('static', filename='uploads/' + student[6]) }}" width="70" height="70"
+                            style="border-radius:50%; border:2px solid #3498db;">
+
+                        {% else %}
+
+                        No Photo
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>{{ student[1] }}</td>
+                    <td>{{ student[2] }}</td>
+                    <td>{{ student[3] }}</td>
+                    <td>{{ student[4] }}</td>
+                    <td>{{ student[5] }}</td>
+
+                    <td>
+
+                        <a href="/student/{{ student[0] }}">
+                            👁 View
+                        </a>
+
+                        |
+
+                        <a href="/edit/{{ student[0] }}">
+                            ✏️ Edit
+                        </a>
+
+                        |
+
+                        <a href="/delete/{{ student[0] }}"
+                            onclick="return confirm('Are you sure you want to delete this student?')">
+                            🗑️ Delete
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

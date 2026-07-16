@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Edit Result</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="sidebar">
+
+            <h2>🎓 ERP Lite</h2>
+
+            <a href="/dashboard">Dashboard</a>
+            <a href="/students">Students</a>
+            <a href="/courses">Courses</a>
+            <a href="/attendance">Attendance</a>
+            <a href="/camera">AI Camera</a>
+            <a href="/fees">Fees</a>
+            <a href="/college-settings">🏫 College Settings</a>
+            <a href="/results">Results</a>
+            <a href="/logout">Logout</a>
+
+        </div>
+
+        <div class="content">
+
+            <h1>Edit Result</h1>
+
+            <form method="POST">
+
+                <input type="text" name="student_name" value="{{ result[1] }}" required>
+
+                <input type="text" name="roll" value="{{ result[2] }}" required>
+
+                <input type="text" name="subject" value="{{ result[3] }}" required>
+
+                <input type="number" name="marks" value="{{ result[4] }}" required>
+
+                <input type="number" name="total_marks" value="{{ result[5] }}" required>
+
+                <br><br>
+
+                <button type="submit">
+
+                    Update Result
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Course Management</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+
+            <h2>🎓 ERP Lite</h2>
+
+            <a href="/dashboard">🏠 Dashboard</a>
+            <a href="/students">👨‍🎓 Students</a>
+            <a href="/courses">📚 Courses</a>
+            <a href="/change-admin">🔐 Change Username & Password</a>
+            <a href="#">📅 Attendance</a>
+            <a href="/fees">💰 Fees</a>
+            <a href="#">📊 Results</a>
+            <a href="/logout">🚪 Logout</a>
+
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+
+            <h1>📚 Course Management</h1>
+
+            <!-- Search -->
+            <form method="GET">
+
+                <input type="text" name="search" placeholder="Search Course">
+
+                <button type="submit">Search</button>
+
+                <a href="/courses">
+                    <button type="button">Show All</button>
+                </a>
+
+            </form>
+
+            <br>
+
+            <!-- Add Course -->
+            <form method="POST">
+
+                <input type="text" name="course_name" placeholder="Course Name" required><br><br>
+
+                <input type="text" name="course_code" placeholder="Course Code" required><br><br>
+
+                <input type="text" name="duration" placeholder="Duration" required><br><br>
+
+                <input type="text" name="fees" placeholder="Course Fees" required><br><br>
+
+                <button type="submit">Add Course</button>
+
+            </form>
+
+            <hr>
+
+            <h2>📋 Course List</h2>
+
+            <table border="1" cellpadding="10">
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Course Name</th>
+                    <th>Course Code</th>
+                    <th>Duration</th>
+                    <th>Fees</th>
+                    <th>Action</th>
+
+                </tr>
+
+                {% for course in courses %}
+
+                <tr>
+
+                    <td>{{ course[0] }}</td>
+                    <td>{{ course[1] }}</td>
+                    <td>{{ course[2] }}</td>
+                    <td>{{ course[3] }}</td>
+                    <td>{{ course[4] }}</td>
+
+                    <td>
+
+                        <a href="/edit-course/{{ course[0] }}">✏️ Edit</a>
+
+                        |
+
+                        <a href="/delete-course/{{ course[0] }}">🗑️ Delete</a>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
