@@ -1,5 +1,6 @@
 Flask
 gunicorn
 opencv-python-headless
-deepface
-tensorflow
+deepface==0.0.93
+tensorflow-cpu==2.16.1
+tf-keras==2.16.0
